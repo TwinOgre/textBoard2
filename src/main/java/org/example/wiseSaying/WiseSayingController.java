@@ -40,4 +40,8 @@ public class WiseSayingController {
             System.out.println(ws.getId() + " / " + ws.getAuthor() + " / " + ws.getContent());
         }
     }
+
+    public void delete() {
+
+    }
 }
