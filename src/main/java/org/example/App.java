@@ -45,9 +45,6 @@ public class App {
 
                 String[] paramsList = commandSplit[1].split("&"); // id=1 & +a
 
-
-
-
                 Map<String,String> params =  new HashMap<>();
 
                 for(String paramsRow : paramsList){
