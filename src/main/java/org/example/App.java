@@ -9,28 +9,28 @@ import java.util.List;
 import java.util.Scanner;
 
 public class App {
-    Scanner sc;
+
     SystemController systemController;
     WiseSayingController wiseSayingController;
 
 
 
-    App(Scanner sc) {
-        this.sc = sc;
+    App() {
+
         this.systemController = new SystemController();
-        this.wiseSayingController = new WiseSayingController(sc);
+        this.wiseSayingController = new WiseSayingController();
     }
 
     void run() {
         SystemController systemController = new SystemController();
-        WiseSayingController wiseSayingController = new WiseSayingController(sc);
+        WiseSayingController wiseSayingController = new WiseSayingController();
 
         System.out.println("실행됨");
 
 
         while (true) {
             System.out.print("명령) ");
-            String command = sc.nextLine().trim();
+            String command = Container.getSc().nextLine().trim();
             if (command.equals("종료")) {
                 systemController.exit();
                 break;
