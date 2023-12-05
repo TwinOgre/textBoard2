@@ -47,6 +47,11 @@ public class WiseSayingController {
         int id = _getIntParam(request.getParams("id"));
 
         WiseSaying ws = _getFindById(id);
+        if(ws == null){
+            System.out.println(id + "번 명언은 존재하지 않습니다.");
+            return;
+        }
+
 
         wiseSayingList.remove(ws);
 

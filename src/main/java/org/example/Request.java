@@ -19,6 +19,9 @@ public class Request {
 
         for (String paramsRow : paramsList) {
             String[] paramsStr = paramsRow.split("=", 2);
+
+            if (commandSplit.length == 1) return; //예외처리
+
             String key = paramsStr[0];
             String value = paramsStr[1]; //d
 
