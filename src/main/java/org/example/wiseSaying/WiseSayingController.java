@@ -46,6 +46,11 @@ public class WiseSayingController {
 
         int id = _getIntParam(request.getParams("id"));
 
+        for(int i = 0; i < wiseSayingList.size();i++){
+            if(wiseSayingList.get(i).getId() == id){
+                wiseSayingList.remove(wiseSayingList.get(i));
+            }
+        }
         System.out.println(id + "번 명언이 삭제되었습니다.");
     }
 

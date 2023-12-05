@@ -13,7 +13,6 @@ public class App {
 
 
     App() {
-
         this.systemController = new SystemController();
         this.wiseSayingController = new WiseSayingController();
     }
