@@ -12,7 +12,6 @@ public class App {
     WiseSayingController wiseSayingController;
 
 
-
     App() {
 
         this.systemController = new SystemController();
@@ -22,29 +21,29 @@ public class App {
     void run() {
         SystemController systemController = new SystemController();
         WiseSayingController wiseSayingController = new WiseSayingController();
-
         System.out.println("실행됨");
 
 
         while (true) {
             System.out.print("명령) ");
             String command = Container.getSc().nextLine().trim();
-            if (command.equals("종료")) {
-                systemController.exit();
-                break;
-            } else if (command.equals("등록")){
-                wiseSayingController.write();
+            Request request = new Request(command);
 
-            } else if(command.equals("목록")){
-                wiseSayingController.list();
-            } else if(command.startsWith("삭제")){
-                Request request = new Request(command);
-                System.out.println(request.getParams("id"));
-                System.out.println(request.getActionCode());
-
-
-//                wiseSayingController.delete();
+            switch (request.getActionCode()) {
+                case "종료":
+                    systemController.exit();
+                    return;
+                case "등록":
+                    wiseSayingController.write();
+                    break;
+                case "목록":
+                    wiseSayingController.list();
+                    break;
+                case "삭제":
+                    wiseSayingController.delete();
+                    break;
             }
         }
     }
 }
+
