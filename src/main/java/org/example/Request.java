@@ -13,7 +13,7 @@ public class Request {
 
         actionCode = commandSplit[0];
 
-        if(commandSplit.length ==1) return;
+        if (commandSplit.length == 1) return;
 
         String[] paramsList = commandSplit[1].split("&");
 

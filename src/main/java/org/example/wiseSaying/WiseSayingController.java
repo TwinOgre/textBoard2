@@ -1,6 +1,7 @@
 package org.example.wiseSaying;
 
 import org.example.Container;
+import org.example.Request;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -41,7 +42,17 @@ public class WiseSayingController {
         }
     }
 
-    public void delete() {
+    public void delete(Request request) {
+        int id = -1;
 
+        try {
+            id = Integer.parseInt(request.getParams("id"));
+        } catch (NumberFormatException e) {
+            System.out.println("id는 정수만 입력이 가능합니다.");
+            return;
+        }
+
+
+        System.out.println(id + "번 명언이 삭제되었습니다.");
     }
 }

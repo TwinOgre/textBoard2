@@ -40,7 +40,7 @@ public class App {
                     wiseSayingController.list();
                     break;
                 case "삭제":
-                    wiseSayingController.delete();
+                    wiseSayingController.delete(request);
                     break;
             }
         }
