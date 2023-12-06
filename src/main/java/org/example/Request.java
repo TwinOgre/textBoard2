@@ -18,14 +18,21 @@ public class Request {
         String[] paramsList = commandSplit[1].split("&");
 
         for (String paramsRow : paramsList) {
-            String[] paramsStr = paramsRow.split("=", 2);
+            try{
+                String[] paramsStr = paramsRow.split("=", 2);
 
-            if (commandSplit.length == 1) return; //예외처리
+                if (commandSplit.length == 1) return; //예외처리
 
-            String key = paramsStr[0];
-            String value = paramsStr[1]; //d
 
-            params.put(key, value);
+                String key = paramsStr[0];
+                String value = paramsStr[1]; //d
+
+                params.put(key, value);
+            } catch (ArrayIndexOutOfBoundsException e) {
+                System.out.println("id=\'원하시는삭제번호\'를 적어주세요.");
+                return;
+            }
+
         }
         System.out.println("actionCode : " + actionCode);
         System.out.println("params : " + params);

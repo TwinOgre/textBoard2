@@ -47,18 +47,23 @@ public class WiseSayingController {
         int id = _getIntParam(request.getParams("id"));
 
         WiseSaying ws = _getFindById(id);
-        if(ws == null){
-            System.out.println(id + "번 명언은 존재하지 않습니다.");
-            return;
-        }
 
+        if (ws == null) {
+            if(id == -1 ){
+                return;
+            }else {
+                System.out.println(id + "번 명언은 존재하지 않습니다.");
+                return;
+            }
+
+        }
 
         wiseSayingList.remove(ws);
 
         System.out.println(id + "번 명언이 삭제되었습니다.");
     }
 
-    private int _getIntParam(String id){
+    private int _getIntParam(String id) {
         int defaultValue = -1;
         try {
             return Integer.parseInt(id);
@@ -67,10 +72,11 @@ public class WiseSayingController {
             return defaultValue;
         }
     }
-    private WiseSaying _getFindById(int id){
-        for(int i = 0; i < wiseSayingList.size();i++){
-            if(wiseSayingList.get(i).getId() == id){
-                return  wiseSayingList.get(i);
+
+    private WiseSaying _getFindById(int id) {
+        for (int i = 0; i < wiseSayingList.size(); i++) {
+            if (wiseSayingList.get(i).getId() == id) {
+                return wiseSayingList.get(i);
             }
         }
         return null;
@@ -79,18 +85,22 @@ public class WiseSayingController {
     public void modify(Request request) {
         int id = _getIntParam(request.getParams("id"));
 
+        if(id == -1 ){
+            return;
+        }
+
         WiseSaying ws = _getFindById(id);
 
-        if(ws == null){
+        if (ws == null) {
             System.out.println(id + "번 명언은 존재하지 않습니다.");
             return;
         }
 
-        System.out.println("기존명언: "+ws.getContent());
+        System.out.println("기존명언: " + ws.getContent());
         System.out.print("명언 : ");
         String content = Container.getSc().nextLine();
 
-        System.out.println("기존작가: "+ws.getAuthor());
+        System.out.println("기존작가: " + ws.getAuthor());
         System.out.print("작가 : ");
         String author = Container.getSc().nextLine();
 
