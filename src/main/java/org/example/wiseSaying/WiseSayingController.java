@@ -75,4 +75,28 @@ public class WiseSayingController {
         }
         return null;
     }
+
+    public void modify(Request request) {
+        int id = _getIntParam(request.getParams("id"));
+
+        WiseSaying ws = _getFindById(id);
+
+        if(ws == null){
+            System.out.println(id + "번 명언은 존재하지 않습니다.");
+            return;
+        }
+
+        System.out.println("기존명언: "+ws.getContent());
+        System.out.print("명언 : ");
+        String content = Container.getSc().nextLine();
+
+        System.out.println("기존작가: "+ws.getAuthor());
+        System.out.print("작가 : ");
+        String author = Container.getSc().nextLine();
+
+        ws.setContent(content);
+        ws.setAuthor(author);
+
+        System.out.println(id + "번 명언이 수정되었습니다.");
+    }
 }
