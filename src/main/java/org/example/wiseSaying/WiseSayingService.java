@@ -72,7 +72,7 @@ public class WiseSayingService {
         }
     }
 
-    private WiseSaying _getFindById(int id) {
+    public WiseSaying _getFindById(int id) {
         for (int i = 0; i < wiseSayingList.size(); i++) {
             if (wiseSayingList.get(i).getId() == id) {
                 return wiseSayingList.get(i);
