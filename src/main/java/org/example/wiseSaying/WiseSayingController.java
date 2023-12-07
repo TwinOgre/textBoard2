@@ -10,8 +10,6 @@ import java.util.Scanner;
 public class WiseSayingController {
         WiseSayingService wiseSayingService;
 
-
-
     public WiseSayingController() {
         wiseSayingService = new WiseSayingService();
     }
@@ -36,64 +34,30 @@ public class WiseSayingController {
 //                    WiseSaying ws =wiseSayingList.get(i);
 //                    System.out.println(ws.getId()+ " / " +ws.getAuthor() + " / " + ws.getContent());
 //                }
-        for (WiseSaying ws : wiseSayingList) {
+//        List<WiseSaying> wiseSayingList = this.wiseSayingService.findByAll();
+
+        for (WiseSaying ws : wiseSayingService.findByAll()) {
             System.out.println(ws.getId() + " / " + ws.getAuthor() + " / " + ws.getContent());
         }
     }
 
     public void delete(Request request) {
 
-        int id = _getIntParam(request.getParams("id"));
+        int id = wiseSayingService.delete(request);
 
-        WiseSaying ws = _getFindById(id);
-
-        if (ws == null) {
-            if(id == -1 ){
-                return;
-            }else {
-                System.out.println(id + "번 명언은 존재하지 않습니다.");
-                return;
-            }
-
+        if(id == -1){
+            System.out.println(id + "번 명언은 존재하지 않습니다.");
         }
 
-        wiseSayingList.remove(ws);
 
         System.out.println(id + "번 명언이 삭제되었습니다.");
     }
 
-    private int _getIntParam(String id) {
-        int defaultValue = -1;
-        try {
-            return Integer.parseInt(id);
-        } catch (NumberFormatException e) {
-            System.out.println("id는 정수만 입력이 가능합니다.");
-            return defaultValue;
-        }
-    }
 
-    private WiseSaying _getFindById(int id) {
-        for (int i = 0; i < wiseSayingList.size(); i++) {
-            if (wiseSayingList.get(i).getId() == id) {
-                return wiseSayingList.get(i);
-            }
-        }
-        return null;
-    }
 
     public void modify(Request request) {
-        int id = _getIntParam(request.getParams("id"));
 
-        if(id == -1 ){
-            return;
-        }
-
-        WiseSaying ws = _getFindById(id);
-
-        if (ws == null) {
-            System.out.println(id + "번 명언은 존재하지 않습니다.");
-            return;
-        }
+        WiseSaying ws = wiseSayingService.modifyWiseSaying(request);
 
         System.out.println("기존명언: " + ws.getContent());
         System.out.print("명언 : ");
@@ -103,9 +67,9 @@ public class WiseSayingController {
         System.out.print("작가 : ");
         String author = Container.getSc().nextLine();
 
-        ws.setContent(content);
-        ws.setAuthor(author);
+        this.wiseSayingService.modify(ws,content,author);
 
-        System.out.println(id + "번 명언이 수정되었습니다.");
+        System.out.println(ws.getId() + "번 명언이 수정되었습니다.");
     }
+
 }
